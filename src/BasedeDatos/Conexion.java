@@ -40,6 +40,25 @@ public class Conexion {
     
     Metodos metodo = new Metodos();
     
+    public Integer obtenerUltimoID(){
+        Connection con = conectar();
+        String consulta = "SELECT clientes.cli_id FROM clientes ORDER BY clientes.cli_id DESC ";
+        ResultSet rs = null;
+        int id;
+        try{
+            PreparedStatement ps = con.prepareStatement(consulta);
+            rs = ps.executeQuery();
+            id = (Integer.parseInt(rs.getObject(1).toString()))+1;
+            Metodos.mensaje("Se leyo de la db el ultimo id disponible: "+id);
+            return id;
+        }catch(Exception ex){
+            Metodos.mensaje_consola("Error de consulta al visualizar el ultimo ID");
+        }
+        Metodos.mensaje("No se leyò el ultimo id");
+        return -1;
+    }
+    
+    
     public ResultSet visualizar_clientes(){
         Connection con = conectar(); //Conectamos a la DB
         ResultSet rs = null; //La variable ResultSet almacena lo que retorne una consulta SQL
@@ -47,7 +66,7 @@ public class Conexion {
             PreparedStatement ps = con.prepareStatement("select * from "+tablaClientes); //PreparedStatement prepara una consulta SQL para su posterior ejecución
             rs = ps.executeQuery(); //El ResultSet será igual a lo que retorne la ejecución del PreparedStatement
         } catch(Exception ex){
-            System.out.println("Error de consulta");
+            System.out.println("Error de consulta al visualizar clientes");
         }
         return rs;
     }
@@ -156,6 +175,8 @@ public class Conexion {
             metodo.mensaje("Error al actualizar");
         }
     }
+    
+
     
     
 }

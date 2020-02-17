@@ -16,7 +16,13 @@ public class Cliente_m extends javax.swing.JFrame {
      */
     public Cliente_m() {
         initComponents();
-        id = null;
+        Conexion conn = new Conexion();
+        if(conn.obtenerUltimoID() == (-1)){
+            id = "0";
+        }else{
+            id = conn.obtenerUltimoID().toString();
+        }
+        lbl_id.setText(id);
     }
 
     public Cliente_m(String ide){
@@ -42,14 +48,14 @@ public class Cliente_m extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lbl_id = new javax.swing.JTextField();
-        lbl_id1 = new javax.swing.JTextField();
-        lbl_id2 = new javax.swing.JTextField();
-        lbl_id3 = new javax.swing.JTextField();
-        lbl_id4 = new javax.swing.JTextField();
-        lbl_id5 = new javax.swing.JTextField();
-        lbl_id6 = new javax.swing.JTextField();
-        lbl_id7 = new javax.swing.JTextField();
+        lbl_Nombre = new javax.swing.JTextField();
+        lbl_Rfc = new javax.swing.JTextField();
+        lbl_Direccion = new javax.swing.JTextField();
+        lbl_cp = new javax.swing.JTextField();
+        lbl_tel = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jSpinner1 = new javax.swing.JSpinner();
+        jSpinner2 = new javax.swing.JSpinner();
 
         jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -91,36 +97,27 @@ public class Cliente_m extends javax.swing.JFrame {
         lbl_id.setText("0");
         lbl_id.setEnabled(false);
 
-        lbl_id1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-        lbl_id1.setText("Nombre de ejemplo");
-        lbl_id1.setEnabled(false);
+        lbl_Nombre.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        lbl_Nombre.setEnabled(false);
 
-        lbl_id2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-        lbl_id2.setText("Nombre de ejemplo");
-        lbl_id2.setEnabled(false);
+        lbl_Rfc.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        lbl_Rfc.setEnabled(false);
 
-        lbl_id3.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-        lbl_id3.setText("Nombre de ejemplo");
-        lbl_id3.setEnabled(false);
+        lbl_Direccion.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        lbl_Direccion.setEnabled(false);
 
-        lbl_id4.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-        lbl_id4.setText("Nombre de ejemplo");
-        lbl_id4.setEnabled(false);
+        lbl_cp.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        lbl_cp.setEnabled(false);
 
-        lbl_id5.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-        lbl_id5.setText("Nombre de ejemplo");
-        lbl_id5.setEnabled(false);
-
-        lbl_id6.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-        lbl_id6.setText("Nombre de ejemplo");
-        lbl_id6.setEnabled(false);
-
-        lbl_id7.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-        lbl_id7.setText("Nombre de ejemplo");
-        lbl_id7.setEnabled(false);
+        lbl_tel.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        lbl_tel.setEnabled(false);
 
         jCheckBox1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         jCheckBox1.setText("Permitir Crédito");
+
+        jSpinner1.setModel(new javax.swing.SpinnerListModel(new String[] {"(USD)-Dolar Estadounidense", "(MXN)-Pesos Mexicanos"}));
+
+        jSpinner2.setModel(new javax.swing.SpinnerListModel(new String[] {"1- Paciente regular", "2- Nuevo paciente", "3- Universidad", "4- Hospital"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,14 +143,15 @@ public class Cliente_m extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_id2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_id1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_id3, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_id4, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_id5, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_id6, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_id7, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox1))
+                            .addComponent(lbl_Rfc, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_cp, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_tel, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jSpinner2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jSpinner1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))
                         .addContainerGap(31, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -166,35 +164,35 @@ public class Cliente_m extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(lbl_id1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(lbl_id2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(lbl_Rfc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(lbl_id3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(lbl_id4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jCheckBox1))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(lbl_id5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(lbl_id6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_cp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(lbl_id7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_tel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
@@ -247,13 +245,13 @@ public class Cliente_m extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JTextField lbl_Direccion;
+    private javax.swing.JTextField lbl_Nombre;
+    private javax.swing.JTextField lbl_Rfc;
+    private javax.swing.JTextField lbl_cp;
     private javax.swing.JTextField lbl_id;
-    private javax.swing.JTextField lbl_id1;
-    private javax.swing.JTextField lbl_id2;
-    private javax.swing.JTextField lbl_id3;
-    private javax.swing.JTextField lbl_id4;
-    private javax.swing.JTextField lbl_id5;
-    private javax.swing.JTextField lbl_id6;
-    private javax.swing.JTextField lbl_id7;
+    private javax.swing.JTextField lbl_tel;
     // End of variables declaration//GEN-END:variables
 }

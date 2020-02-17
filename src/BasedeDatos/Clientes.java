@@ -5,6 +5,8 @@
  */
 package BasedeDatos;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Rumyn
@@ -32,9 +34,10 @@ public class Clientes extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         btn_NCliente = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabla_Clientes = new javax.swing.JTable();
         btn_MCliente = new javax.swing.JButton();
         btn_Salir = new javax.swing.JButton();
+        btn_Actualizar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -57,7 +60,8 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_Clientes.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        tabla_Clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null}
@@ -66,8 +70,9 @@ public class Clientes extends javax.swing.JFrame {
                 "ID", "Nombre"
             }
         ));
-        jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane2.setViewportView(jTable2);
+        tabla_Clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tabla_Clientes.setRowHeight(100);
+        jScrollPane2.setViewportView(tabla_Clientes);
 
         btn_MCliente.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_MCliente.setForeground(new java.awt.Color(51, 153, 255));
@@ -80,7 +85,22 @@ public class Clientes extends javax.swing.JFrame {
 
         btn_Salir.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_Salir.setForeground(new java.awt.Color(255, 51, 51));
-        btn_Salir.setText("SALIR");
+        btn_Salir.setText("REGRESAR");
+        btn_Salir.setActionCommand("REGRESAR");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
+
+        btn_Actualizar.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
+        btn_Actualizar.setForeground(new java.awt.Color(255, 102, 102));
+        btn_Actualizar.setText("Actualizar");
+        btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,18 +108,22 @@ public class Clientes extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btn_NCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
-                    .addComponent(btn_MCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btn_NCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2)
+                        .addComponent(btn_MCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btn_Actualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_NCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -122,11 +146,54 @@ public class Clientes extends javax.swing.JFrame {
 
     private void btn_MClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MClienteActionPerformed
 
-        Cliente_m cli = new Cliente_m(id);
-        cli.show();
+        DefaultTableModel dt = (DefaultTableModel) tabla_Clientes.getModel();
+        try{
+            if(tabla_Clientes.getSelectedRow() != (-1)){
+                id = dt.getValueAt(tabla_Clientes.getSelectedRow(), 0).toString();
+
+                if (id != null){
+                    Cliente_m cli = new Cliente_m(id);
+                    cli.show(); 
+                } else {
+                    Metodos.mensaje("Actualice primero la tabla y seleccione un usuario");
+                }
+            } else {
+                Metodos.mensaje("Selecciona un usuario primero");
+            }
+            
+        }catch(Exception ex){
+            Metodos.mensaje("Actualice primero la tabla ex2");
+        }
+        id = null;
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_MClienteActionPerformed
+
+    private void actualizarTabla(){
+        VerTabla v = new VerTabla();
+        v.visualizar_clientes(tabla_Clientes);
+    }
+    
+    
+    private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
+
+        try{
+            actualizarTabla();
+        }catch (Exception ex){
+            Metodos.mensaje("No se pudo cargar la tabla");
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ActualizarActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+
+        Menu_db men = new Menu_db();
+        men.show();
+        this.hide();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_SalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,12 +231,13 @@ public class Clientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Actualizar;
     private javax.swing.JButton btn_MCliente;
     private javax.swing.JButton btn_NCliente;
     private javax.swing.JButton btn_Salir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tabla_Clientes;
     // End of variables declaration//GEN-END:variables
 }

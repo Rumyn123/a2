@@ -13,11 +13,11 @@ import javax.swing.JOptionPane;
  */
 public class Metodos {
     
-    public void mensaje_consola (String men){
+    public static void mensaje_consola (String men){
         System.out.println(men);
     }
     
-    public void mensaje(String mensa){
+    public static void mensaje(String mensa){
         JOptionPane.showMessageDialog(null, mensa);
     }
 }

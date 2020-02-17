@@ -45,6 +45,11 @@ public class Empresa extends javax.swing.JFrame {
         btn_Actualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         tabla_Empresa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,8 +160,7 @@ public class Empresa extends javax.swing.JFrame {
 
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
 
-        VerTabla v = new VerTabla();
-        v.visualizar_empresa(tabla_Empresa);
+        actualizarTabla();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_ActualizarActionPerformed
@@ -169,6 +173,24 @@ public class Empresa extends javax.swing.JFrame {
         
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void actualizarTabla(){
+        VerTabla v = new VerTabla();
+        v.visualizar_empresa(tabla_Empresa);
+    }
+    
+    
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+        try{
+            actualizarTabla();
+        }catch(Exception ex){
+            Metodos.mensaje("No se pudo cargar la tabla");
+        }
+        
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

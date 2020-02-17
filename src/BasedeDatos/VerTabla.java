@@ -75,26 +75,14 @@ public class VerTabla {
         tabla.setDefaultRenderer(Object.class, new TablaImagen());
         
         DefaultTableModel dt = new DefaultTableModel();
-        dt.addColumn("RFC");
-        dt.addColumn("REGISTRO DE CAMARA");
-        dt.addColumn("CUENTA ESTATAL");
-        dt.addColumn("REPRESENTANTE LEGAL");
-        dt.addColumn("DIRECCION FISICA");
-        dt.addColumn("CODIGO POSTAL");
-        dt.addColumn("TELEFONO");
+        dt.addColumn("ID");
+        dt.addColumn("Nombre");
         
         try{
             while(rs.next()){
-                Object[] fila = new Object[7]; //El 2 es el numero de columnas
+                Object[] fila = new Object[2]; //El 2 es el numero de columnas
                 fila[0] = rs.getObject(1); //primer valor es la id, el segundo el nombre
-                fila[1] = rs.getObject(2);  
-                fila[2] = rs.getObject(3);  
-                fila[3] = rs.getObject(4);  
-                fila[4] = rs.getObject(5);  
-                fila[5] = rs.getObject(6);  
-                fila[6] = rs.getObject(7);
-                
-                
+                fila[1] = rs.getObject(2);               
             }
             
             tabla.setModel(dt);

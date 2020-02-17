@@ -5,6 +5,7 @@
  */
 package BasedeDatos;
 
+
 /**
  *
  * @author Rumyn
@@ -18,6 +19,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         initComponents();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +45,11 @@ public class Menu_Principal extends javax.swing.JFrame {
 
         btn_Empresa.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_Empresa.setText("Empresa");
+        btn_Empresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EmpresaActionPerformed(evt);
+            }
+        });
 
         btn_GDB.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_GDB.setText("Gestionar DB");
@@ -58,6 +65,11 @@ public class Menu_Principal extends javax.swing.JFrame {
         btn_Salir.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_Salir.setForeground(new java.awt.Color(255, 51, 51));
         btn_Salir.setText("SALIR");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,6 +112,22 @@ public class Menu_Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_GDBActionPerformed
 
+    private void btn_EmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EmpresaActionPerformed
+
+        Empresa em = new Empresa();
+        em.show();
+        this.hide();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EmpresaActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+
+        System.exit(0);
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -131,10 +159,8 @@ public class Menu_Principal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Menu_Principal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Menu_Principal().setVisible(true);
         });
     }
 

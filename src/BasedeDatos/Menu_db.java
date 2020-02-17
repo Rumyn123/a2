@@ -42,6 +42,11 @@ public class Menu_db extends javax.swing.JFrame {
 
         btn_Clientes.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_Clientes.setText("Clientes");
+        btn_Clientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ClientesActionPerformed(evt);
+            }
+        });
 
         btn_Precios.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_Precios.setText("Precios");
@@ -109,6 +114,15 @@ public class Menu_db extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_RegresarActionPerformed
 
+    private void btn_ClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClientesActionPerformed
+
+        Clientes cli = new Clientes();
+        cli.show();
+        this.hide();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -138,10 +152,8 @@ public class Menu_db extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Menu_db().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Menu_db().setVisible(true);
         });
     }
 

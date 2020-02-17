@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 /**
  *
  * @author Rumyn
@@ -38,6 +37,8 @@ public class Conexion {
         return con;
         
     }
+    
+    Metodos metodo = new Metodos();
     
     public ResultSet visualizar_clientes(){
         Connection con = conectar(); //Conectamos a la DB
@@ -110,4 +111,51 @@ public class Conexion {
         }
         return rs;
     }
+    
+    public void guardar_empresa(String rfc, String rCamara, String cEstatal, String rLegal, String direccion, String cp, String tel){
+        Connection con = conectar(); //Conectamos a la DB
+        String insert = "insert into empresa (em_rfc, em_camara, em_estatal, em_representante, em_direccion, em_cp, em_tel) values (?,?,?,?,?,?,?)"; //Creamos un String con la consulta del insert
+        PreparedStatement ps = null; //preparar la consulta
+
+        try{
+            ps = con.prepareStatement(insert); //Prepara la consulta
+            ps.setString(1, rfc);    //Cambia el primer parametro (nombre) del insert por la variable nombre
+            ps.setString(2, rCamara);
+            ps.setString(3, cEstatal);
+            ps.setString(4, rLegal);
+            ps.setString(5, direccion);
+            ps.setString(6, cp);
+            ps.setString(7, tel);
+
+            
+            ps.executeUpdate(); //Ejecuta la consulta
+        }catch(Exception ex){
+            metodo.mensaje("Error al guardar");
+        }
+    }
+    
+    public void actualizar_empresa(String rfc, String rCamara, String cEstatal, String rLegal, String direccion, String cp, String tel){
+        Connection con = conectar();
+        String update = "update empresa set em_rfc = ?, em_camara = ?, em_estatal = ?, em_representante = ?, em_direccion = ?, em_cp = ?, em_tel = ? WHERE empresa.em_rfc = ? ";
+        PreparedStatement ps = null;
+        try{
+            ps = con.prepareStatement(update);
+            ps.setString(1, rfc);    //Cambia el primer parametro (nombre) del insert por la variable nombre
+            ps.setString(2, rCamara);
+            ps.setString(3, cEstatal);
+            ps.setString(4, rLegal);
+            ps.setString(5, direccion);
+            ps.setString(6, cp);
+            ps.setString(7, tel);
+            ps.setString(8, rfc);
+            
+            metodo.mensaje("La consulta resultante es "+ update+" con el rfc " + rfc + " el rCamara "+ rCamara + " La cEstatal "+ cEstatal + " El rLegal "+ rLegal + " la dir " + direccion + " el cp "+ cp+ " y el tel "+tel);
+            
+            ps.executeUpdate(); //Ejecuta la consulta
+        }catch(Exception ex){
+            metodo.mensaje("Error al actualizar");
+        }
+    }
+    
+    
 }

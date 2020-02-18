@@ -5,6 +5,7 @@
  */
 package BasedeDatos;
 
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.swing.JTable;
@@ -69,7 +70,6 @@ public class VerTabla {
     
     public void visualizar_clientes(JTable tabla){
         Conexion conn = new Conexion();
-        Connection con = conn.conectar();
         ResultSet rs = conn.visualizar_clientes();
         
         tabla.setDefaultRenderer(Object.class, new TablaImagen());
@@ -89,6 +89,32 @@ public class VerTabla {
             tabla.setRowHeight(100);
         }catch(Exception ex){
             System.out.println("Error al visualizar en la tabla");
+        }
+    }
+    
+    public void visualizar_precios(JTable tabla){
+        Conexion conn = new Conexion();
+        ResultSet rs = conn.visualizar_precios();
+        tabla.setDefaultRenderer(Object.class, new TablaImagen());
+        
+        DefaultTableModel dt = new DefaultTableModel();
+        dt.addColumn("ID");
+        dt.addColumn("Nombre");
+        dt.addColumn("Precio");
+        
+        try{
+            while(rs.next()){
+                Object[] fila = new Object[3]; //El 2 es el numero de columnas
+                fila[0] = rs.getObject(1); //primer valor es la id, el segundo el nombre
+                fila[1] = rs.getObject(2);               
+                fila[2] = rs.getObject(3);     
+                dt.addRow(fila);
+            }
+            
+            tabla.setModel(dt);
+            tabla.setRowHeight(50);
+        }catch(Exception ex){
+            System.out.println("Error al visualizar en la tabla precios");
         }
     }
     

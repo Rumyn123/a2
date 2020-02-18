@@ -11,36 +11,36 @@ import java.sql.ResultSet;
  *
  * @author Rumyn
  */
-public class Cliente_m extends javax.swing.JFrame {
+public class Precios_m extends javax.swing.JFrame {
     String id = null;
     /**
      * Creates new form Cliente_m
      */
-    public Cliente_m() {
+    public Precios_m() {
         initComponents();
         Conexion conn = new Conexion();
-        if(conn.obtenerUltimoID("Clientes") == (-1)){
+        if(conn.obtenerUltimoID("Precios") == (-1)){
             id = "0";
         }else{
-            id = conn.obtenerUltimoID("Clientes").toString();
+            id = conn.obtenerUltimoID("Precios").toString();
         }
         lbl_id.setText(id);
     }
 
-    public Cliente_m(String ide){
+    public Precios_m(String ide){
         initComponents();
         id = ide;
         lbl_id.setText(id);
-        cargar_Datos(id);
+        //cargar_Datos(id);
     }
     
-    private void cargar_Datos(String codigo){
+   /* private void cargar_Datos(String codigo){
         Conexion conn = new Conexion();
         ResultSet rs = conn.buscarId_Cliente(codigo);
             try{
                 while(rs.next()){
                     lbl_Nombre.setText(rs.getObject(2).toString());
-                    lbl_Rfc.setText(rs.getObject(3).toString());
+                    lbl_Costo.setText(rs.getObject(3).toString());
                     switch(rs.getObject(4).toString()){
                         case "USD":
                             spn_Moneda.setValue("USD");
@@ -58,7 +58,7 @@ public class Cliente_m extends javax.swing.JFrame {
                             /*1- Paciente regular
                             2- Nuevo paciente
                             3- Universidad
-                            4- Hospital*/
+                            4- Hospital
                         break;
                         case "Nuevo paciente":
                             spn_Tipo.setValue("2- Nuevo paciente");
@@ -83,7 +83,7 @@ public class Cliente_m extends javax.swing.JFrame {
             }catch(Exception ex){
                 
             }
-    }
+    }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,21 +96,9 @@ public class Cliente_m extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         lbl_id = new javax.swing.JTextField();
         lbl_Nombre = new javax.swing.JTextField();
-        lbl_Rfc = new javax.swing.JTextField();
-        lbl_Direccion = new javax.swing.JTextField();
-        lbl_cp = new javax.swing.JTextField();
-        lbl_tel = new javax.swing.JTextField();
-        chk_credito = new javax.swing.JCheckBox();
-        spn_Moneda = new javax.swing.JSpinner();
-        spn_Tipo = new javax.swing.JSpinner();
+        lbl_Costo = new javax.swing.JTextField();
         btn_Guardar = new javax.swing.JButton();
         btn_Regresar = new javax.swing.JButton();
 
@@ -124,31 +112,7 @@ public class Cliente_m extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("RFC");
-
-        jLabel4.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("MONEDA");
-
-        jLabel5.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Tipo");
-
-        jLabel6.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Credito");
-
-        jLabel7.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Direccion");
-
-        jLabel8.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Codigo Postal");
-
-        jLabel9.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Telefono");
+        jLabel3.setText("Costo");
 
         lbl_id.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 18)); // NOI18N
         lbl_id.setText("0");
@@ -156,20 +120,7 @@ public class Cliente_m extends javax.swing.JFrame {
 
         lbl_Nombre.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
 
-        lbl_Rfc.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-
-        lbl_Direccion.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-
-        lbl_cp.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-
-        lbl_tel.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-
-        chk_credito.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
-        chk_credito.setText("Permitir Crédito");
-
-        spn_Moneda.setModel(new javax.swing.SpinnerListModel(new String[] {"USD", "MXN"}));
-
-        spn_Tipo.setModel(new javax.swing.SpinnerListModel(new String[] {"1- Paciente regular", "2- Nuevo paciente", "3- Universidad", "4- Hospital"}));
+        lbl_Costo.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
 
         btn_Guardar.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_Guardar.setForeground(new java.awt.Color(102, 255, 153));
@@ -198,15 +149,9 @@ public class Cliente_m extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(70, 70, 70)
@@ -215,15 +160,8 @@ public class Cliente_m extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_Rfc, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_cp, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_tel, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(chk_credito)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(spn_Tipo, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(spn_Moneda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))
+                                    .addComponent(lbl_Costo, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(31, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btn_Regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,32 +183,8 @@ public class Cliente_m extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(lbl_Rfc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(spn_Moneda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(spn_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(chk_credito))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(lbl_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(lbl_cp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(lbl_tel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                    .addComponent(lbl_Costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Guardar)
                     .addComponent(btn_Regresar))
@@ -307,20 +221,21 @@ public class Cliente_m extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cliente_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Precios_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cliente_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Precios_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cliente_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Precios_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cliente_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Precios_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cliente_m().setVisible(true);
+                new Precios_m().setVisible(true);
             }
         });
     }
@@ -328,23 +243,11 @@ public class Cliente_m extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Guardar;
     private javax.swing.JButton btn_Regresar;
-    private javax.swing.JCheckBox chk_credito;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField lbl_Direccion;
+    private javax.swing.JTextField lbl_Costo;
     private javax.swing.JTextField lbl_Nombre;
-    private javax.swing.JTextField lbl_Rfc;
-    private javax.swing.JTextField lbl_cp;
     private javax.swing.JTextField lbl_id;
-    private javax.swing.JTextField lbl_tel;
-    private javax.swing.JSpinner spn_Moneda;
-    private javax.swing.JSpinner spn_Tipo;
     // End of variables declaration//GEN-END:variables
 }

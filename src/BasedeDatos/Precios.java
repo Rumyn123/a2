@@ -5,6 +5,8 @@
  */
 package BasedeDatos;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Rumyn
@@ -133,6 +135,29 @@ public class Precios extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_RegresarActionPerformed
 
     private void btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ModificarActionPerformed
+
+        String id;
+        DefaultTableModel dt = (DefaultTableModel) tabla_precios.getModel();
+        try{
+            if(tabla_precios.getSelectedRow() != (-1)){
+                id = dt.getValueAt(tabla_precios.getSelectedRow(), 0).toString();
+
+                if (id != null){
+                    Precios_m pre = new Precios_m(id);
+                    pre.show(); 
+                } else {
+                    Metodos.mensaje("Actualice primero la tabla y seleccione un precio");
+                }
+            } else {
+                Metodos.mensaje("Selecciona un precio primero");
+            }
+            
+        }catch(Exception ex){
+            Metodos.mensaje("Actualice primero la tabla ex2");
+        }
+        id = null;
+
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_ModificarActionPerformed
 

@@ -11,17 +11,17 @@ import java.sql.ResultSet;
  *
  * @author Rumyn
  */
-public class Precios_m extends javax.swing.JFrame {
+public class Univ_m extends javax.swing.JFrame {
     String id = null;
     String bandera = null;
     /**
      * Creates new form Cliente_m
      */
-    public Precios_m() {
+    public Univ_m() {
         initComponents();
         Conexion conn = new Conexion();
-        if(conn.obtenerUltimoID("Precio") >= 0){
-            id = conn.obtenerUltimoID("Precio").toString();
+        if(conn.obtenerUltimoID("Univ") >= 0){
+            id = conn.obtenerUltimoID("Univ").toString();
             Metodos.mensaje("Se entro en ultimo id");
         }else{
             id = "0";
@@ -31,7 +31,7 @@ public class Precios_m extends javax.swing.JFrame {
         bandera = "n";
     }
 
-    public Precios_m(String ide){
+    public Univ_m(String ide){
         initComponents();
         id = ide;
         lbl_id.setText(id);
@@ -41,12 +41,12 @@ public class Precios_m extends javax.swing.JFrame {
     
     private void cargar_Datos(String codigo){
         Conexion conn = new Conexion();
-        ResultSet rs = conn.buscarId("Precio",codigo);
+        ResultSet rs = conn.buscarId("Univ",codigo);
             try{
                 while(rs.next()){
                     lbl_id.setText(rs.getObject(1).toString());
                     lbl_Nombre.setText(rs.getObject(2).toString());
-                    lbl_Costo.setText(rs.getObject(3).toString());
+                    lbl_Corto.setText(rs.getObject(3).toString());
                 }
             }catch(Exception ex){
                 
@@ -66,7 +66,7 @@ public class Precios_m extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lbl_id = new javax.swing.JTextField();
         lbl_Nombre = new javax.swing.JTextField();
-        lbl_Costo = new javax.swing.JTextField();
+        lbl_Corto = new javax.swing.JTextField();
         btn_Guardar = new javax.swing.JButton();
         btn_Regresar = new javax.swing.JButton();
 
@@ -80,7 +80,7 @@ public class Precios_m extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Costo");
+        jLabel3.setText("Corto");
 
         lbl_id.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 18)); // NOI18N
         lbl_id.setText("0");
@@ -88,7 +88,7 @@ public class Precios_m extends javax.swing.JFrame {
 
         lbl_Nombre.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
 
-        lbl_Costo.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        lbl_Corto.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
 
         btn_Guardar.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_Guardar.setForeground(new java.awt.Color(102, 255, 153));
@@ -128,7 +128,7 @@ public class Precios_m extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_Costo, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_Corto, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(31, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -151,7 +151,7 @@ public class Precios_m extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(lbl_Costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_Corto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Guardar)
@@ -165,16 +165,16 @@ public class Precios_m extends javax.swing.JFrame {
     private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
 
         Conexion conn = new Conexion();
-        String nombre, costo;
+        String nombre, corto;
         nombre = lbl_Nombre.getText().toString();
-        costo = lbl_Costo.getText().toString();
+        corto = lbl_Corto.getText().toString();
         
-        if(nombre.trim().length() != 0 && costo.trim().length() != 0){
+        if(nombre.trim().length() != 0 && corto.trim().length() != 0){
             if(bandera.equals("n")){
-                conn.guardar("Precio",nombre,costo,null,null,null,null,null,null,null);
-                Metodos.mensaje("Precio registrado con exito");
+                conn.guardar("Univ",nombre,corto,null,null,null,null,null,null,null);
+                Metodos.mensaje("Unidad de venta registrada con exito");
             }else if(bandera.equals("m")){
-                conn.actualizar("Precio",nombre,costo,id,null,null,null,null,null,null);
+                conn.actualizar("Univ",nombre,corto,id,null,null,null,null,null,null);
                 Metodos.mensaje("Cambios realizados con exito");
             }
         }else {
@@ -205,21 +205,23 @@ public class Precios_m extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Precios_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Univ_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Precios_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Univ_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Precios_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Univ_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Precios_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Univ_m.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Precios_m().setVisible(true);
+                new Univ_m().setVisible(true);
             }
         });
     }
@@ -230,7 +232,7 @@ public class Precios_m extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField lbl_Costo;
+    private javax.swing.JTextField lbl_Corto;
     private javax.swing.JTextField lbl_Nombre;
     private javax.swing.JTextField lbl_id;
     // End of variables declaration//GEN-END:variables

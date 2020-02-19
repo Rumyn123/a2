@@ -13,18 +13,20 @@ import java.sql.ResultSet;
  */
 public class Cliente_m extends javax.swing.JFrame {
     String id = null;
+    String bandera;
     /**
      * Creates new form Cliente_m
      */
     public Cliente_m() {
         initComponents();
         Conexion conn = new Conexion();
-        if(conn.obtenerUltimoID("Clientes") == (-1)){
+        if(conn.obtenerUltimoID("Cliente") == (-1)){
             id = "0";
         }else{
-            id = conn.obtenerUltimoID("Clientes").toString();
+            id = conn.obtenerUltimoID("Cliente").toString();
         }
         lbl_id.setText(id);
+        bandera = "n";
     }
 
     public Cliente_m(String ide){
@@ -32,11 +34,12 @@ public class Cliente_m extends javax.swing.JFrame {
         id = ide;
         lbl_id.setText(id);
         cargar_Datos(id);
+        bandera = "m";
     }
     
     private void cargar_Datos(String codigo){
         Conexion conn = new Conexion();
-        ResultSet rs = conn.buscarId_Cliente(codigo);
+        ResultSet rs = conn.buscarId("Cliente", codigo);
             try{
                 while(rs.next()){
                     lbl_Nombre.setText(rs.getObject(2).toString());
@@ -54,20 +57,20 @@ public class Cliente_m extends javax.swing.JFrame {
                     }
                     switch(rs.getObject(5).toString()){
                         case "Paciente regular":
-                            spn_Tipo.setValue("1- Paciente regular");
+                            spn_Tipo.setValue("Paciente regular");
                             /*1- Paciente regular
                             2- Nuevo paciente
                             3- Universidad
                             4- Hospital*/
                         break;
                         case "Nuevo paciente":
-                            spn_Tipo.setValue("2- Nuevo paciente");
+                            spn_Tipo.setValue("Nuevo paciente");
                         break;
                         case "Universidad":
-                            spn_Tipo.setValue("3- Universidad");
+                            spn_Tipo.setValue("Universidad");
                         break;
                         case "Hospital":
-                            spn_Tipo.setValue("4- Hospital");
+                            spn_Tipo.setValue("Hospital");
                         break;
                         default:
                             Metodos.mensaje("Porfavor, no intente romper el codigo");
@@ -169,7 +172,7 @@ public class Cliente_m extends javax.swing.JFrame {
 
         spn_Moneda.setModel(new javax.swing.SpinnerListModel(new String[] {"USD", "MXN"}));
 
-        spn_Tipo.setModel(new javax.swing.SpinnerListModel(new String[] {"1- Paciente regular", "2- Nuevo paciente", "3- Universidad", "4- Hospital"}));
+        spn_Tipo.setModel(new javax.swing.SpinnerListModel(new String[] {"Paciente regular", "Nuevo paciente", "Universidad", "Hospital"}));
 
         btn_Guardar.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_Guardar.setForeground(new java.awt.Color(102, 255, 153));
@@ -282,11 +285,41 @@ public class Cliente_m extends javax.swing.JFrame {
 
     private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
 
+        Conexion conn = new Conexion();
+        String nombre, rfc, moneda, tipo, direccion, cp, tel;
+        String credito;
+        nombre = lbl_Nombre.getText().toString();
+        rfc = lbl_Rfc.getText().toString();
+        moneda = spn_Moneda.getValue().toString();
+        tipo = spn_Tipo.getValue().toString();
+        direccion = lbl_Direccion.getText().toString();
+        cp = lbl_cp.getText().toString();
+        tel = lbl_tel.getText().toString();
+        if(chk_credito.isSelected()){
+            credito = "1";
+        } else{
+            credito = "0";
+        }
+        
+        if(nombre.trim().length() != 0 && rfc.trim().length() != 0 && credito.trim().length() != 0 && moneda.trim().length() != 0 && tipo.trim().length() != 0 && direccion.trim().length() != 0 && cp.trim().length() != 0 && tel.trim().length() != 0){
+            if(bandera.equals("n")){
+                conn.guardar("Cliente",nombre,rfc,moneda,tipo,credito,direccion,cp,tel,null);
+                Metodos.mensaje("Cliente registrado con exito");
+            }else if(bandera.equals("m")){
+                conn.actualizar("Cliente",nombre,rfc,moneda,tipo,credito,direccion,cp,tel,id);
+                Metodos.mensaje("Cambios realizados con exito");
+            }
+        }else {
+            Metodos.mensaje("Porfavor, llene todos los campos");
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_GuardarActionPerformed
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
+   
+        this.hide();
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_RegresarActionPerformed
 

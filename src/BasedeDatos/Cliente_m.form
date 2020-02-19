@@ -275,10 +275,10 @@
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel type="list">
-            <ListItem value="1- Paciente regular"/>
-            <ListItem value="2- Nuevo paciente"/>
-            <ListItem value="3- Universidad"/>
-            <ListItem value="4- Hospital"/>
+            <ListItem value="Paciente regular"/>
+            <ListItem value="Nuevo paciente"/>
+            <ListItem value="Universidad"/>
+            <ListItem value="Hospital"/>
           </SpinnerModel>
         </Property>
       </Properties>

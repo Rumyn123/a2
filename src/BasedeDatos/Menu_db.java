@@ -61,6 +61,11 @@ public class Menu_db extends javax.swing.JFrame {
 
         btn_UVenta.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_UVenta.setText("U. Venta");
+        btn_UVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_UVentaActionPerformed(evt);
+            }
+        });
 
         btn_Regresar.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_Regresar.setForeground(new java.awt.Color(0, 204, 51));
@@ -136,6 +141,14 @@ public class Menu_db extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_PreciosActionPerformed
+
+    private void btn_UVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UVentaActionPerformed
+
+        Univ uni = new Univ();
+        uni.show();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_UVentaActionPerformed
 
     /**
      * @param args the command line arguments

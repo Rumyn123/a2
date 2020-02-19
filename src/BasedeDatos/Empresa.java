@@ -24,7 +24,7 @@ public class Empresa extends javax.swing.JFrame {
         btn_Actualizar.setBackground(Color.DARK_GRAY);
         btn_Editar.setBackground(Color.DARK_GRAY);
         btn_Salir.setBackground(Color.DARK_GRAY);
-        
+        setLocationRelativeTo(null);
         
     }
 

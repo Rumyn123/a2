@@ -19,6 +19,7 @@ public class Clientes extends javax.swing.JFrame {
      */
     public Clientes() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

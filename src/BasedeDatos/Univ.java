@@ -18,6 +18,7 @@ public class Univ extends javax.swing.JFrame {
      */
     public Univ() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

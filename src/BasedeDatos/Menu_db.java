@@ -16,6 +16,7 @@ public class Menu_db extends javax.swing.JFrame {
      */
     public Menu_db() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

@@ -17,6 +17,7 @@ public class Empresa_m extends javax.swing.JFrame {
     public Empresa_m() {
         initComponents();
         prfc = null;
+        setLocationRelativeTo(null);
     }
 
     public Empresa_m(String rfcc, String rrCamara, String rcEstatal, String rrLegal, String rdFisica, String rcp, String rtel){
@@ -30,7 +31,7 @@ public class Empresa_m extends javax.swing.JFrame {
         lbl_dFisica.setText(rdFisica);
         lbl_cp.setText(rcp);
         lbl_tel.setText(rtel);
-
+        setLocationRelativeTo(null);
     }
     
     Metodos metodo = new Metodos();

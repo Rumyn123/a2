@@ -18,6 +18,7 @@ public class Precios extends javax.swing.JFrame {
      */
     public Precios() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

@@ -27,6 +27,7 @@ public class Cliente_m extends javax.swing.JFrame {
         }
         lbl_id.setText(id);
         bandera = "n";
+        setLocationRelativeTo(null);
     }
 
     public Cliente_m(String ide){
@@ -35,6 +36,7 @@ public class Cliente_m extends javax.swing.JFrame {
         lbl_id.setText(id);
         cargar_Datos(id);
         bandera = "m";
+        setLocationRelativeTo(null);
     }
     
     private void cargar_Datos(String codigo){

@@ -5,6 +5,8 @@
  */
 package BasedeDatos;
 
+import java.awt.Color;
+
 
 /**
  *
@@ -18,6 +20,10 @@ public class Menu_Principal extends javax.swing.JFrame {
     public Menu_Principal() {
         initComponents();
         setLocationRelativeTo(null);
+        btn_Empresa.setBackground(Color.DARK_GRAY);
+        btn_GDB.setBackground(Color.DARK_GRAY);
+        btn_Salir.setBackground(Color.DARK_GRAY);
+        btn_Ventas.setBackground(Color.DARK_GRAY);
     }
 
     

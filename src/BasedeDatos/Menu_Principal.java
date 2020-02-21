@@ -51,6 +51,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         jLabel1.setText("MENU");
 
         btn_Empresa.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
+        btn_Empresa.setForeground(new java.awt.Color(204, 204, 204));
         btn_Empresa.setText("Empresa");
         btn_Empresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +60,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         });
 
         btn_GDB.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
+        btn_GDB.setForeground(new java.awt.Color(204, 204, 204));
         btn_GDB.setText("Gestionar DB");
         btn_GDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,10 +69,11 @@ public class Menu_Principal extends javax.swing.JFrame {
         });
 
         btn_Ventas.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
+        btn_Ventas.setForeground(new java.awt.Color(204, 204, 204));
         btn_Ventas.setText("Ventas");
 
         btn_Salir.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
-        btn_Salir.setForeground(new java.awt.Color(255, 51, 51));
+        btn_Salir.setForeground(new java.awt.Color(255, 102, 102));
         btn_Salir.setText("SALIR");
         btn_Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

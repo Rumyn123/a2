@@ -20,8 +20,8 @@ public class Servicios_m extends javax.swing.JFrame {
     public Servicios_m() {
         initComponents();
         Conexion conn = new Conexion();
-        if(conn.obtenerUltimoID("Precio") >= 0){
-            id = conn.obtenerUltimoID("Precio").toString();
+        if(conn.obtenerUltimoID("Servicio") >= 0){
+            id = conn.obtenerUltimoID("Servicio").toString();
             Metodos.mensaje("Se entro en ultimo id");
         }else{
             id = "0";
@@ -43,12 +43,15 @@ public class Servicios_m extends javax.swing.JFrame {
     
     private void cargar_Datos(String codigo){
         Conexion conn = new Conexion();
-        ResultSet rs = conn.buscarId("Precio",codigo);
+        ResultSet rs = conn.buscarId("Servicio",codigo);
             try{
                 while(rs.next()){
                     lbl_id.setText(rs.getObject(1).toString());
                     lbl_Nombre.setText(rs.getObject(2).toString());
-                    lbl_Costo.setText(rs.getObject(3).toString());
+                    lbl_Corto.setText(rs.getObject(3).toString());
+                    lbl_Desc.setText(rs.getObject(4).toString());
+                    spn_Uni.setValue(rs.getObject(5));
+                    spn_Pre.setValue(rs.getObject(6));
                 }
             }catch(Exception ex){
                 
@@ -68,9 +71,15 @@ public class Servicios_m extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lbl_id = new javax.swing.JTextField();
         lbl_Nombre = new javax.swing.JTextField();
-        lbl_Costo = new javax.swing.JTextField();
+        lbl_Corto = new javax.swing.JTextField();
         btn_Guardar = new javax.swing.JButton();
         btn_Regresar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        lbl_Desc = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        spn_Uni = new javax.swing.JSpinner();
+        spn_Pre = new javax.swing.JSpinner();
 
         jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -82,7 +91,7 @@ public class Servicios_m extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Costo");
+        jLabel3.setText("Corto");
 
         lbl_id.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 18)); // NOI18N
         lbl_id.setText("0");
@@ -90,7 +99,7 @@ public class Servicios_m extends javax.swing.JFrame {
 
         lbl_Nombre.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
 
-        lbl_Costo.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        lbl_Corto.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
 
         btn_Guardar.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_Guardar.setForeground(new java.awt.Color(102, 255, 153));
@@ -110,6 +119,24 @@ public class Servicios_m extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Descripcion");
+
+        lbl_Desc.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Unidad");
+
+        jLabel6.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Precio");
+
+        spn_Uni.setModel(new javax.swing.SpinnerListModel(new String[] {"Consulta en consultorio", "Cirugía complicada", "Consulta a domicilio", "Consulta en hospital", "Cirugía intermedia", "Conferencia", "Cirugía simple", "Hora clase"}));
+
+        spn_Pre.setModel(new javax.swing.SpinnerListModel(new String[] {"Paciente regular", "Nuevo paciente", "Universidad", "Hospital"}));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,7 +148,10 @@ public class Servicios_m extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(70, 70, 70)
@@ -130,8 +160,11 @@ public class Servicios_m extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_Costo, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lbl_Corto, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_Desc, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spn_Uni, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spn_Pre, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(31, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btn_Regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,8 +186,20 @@ public class Servicios_m extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(lbl_Costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                    .addComponent(lbl_Corto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lbl_Desc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(spn_Uni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(spn_Pre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Guardar)
                     .addComponent(btn_Regresar))
@@ -167,16 +212,56 @@ public class Servicios_m extends javax.swing.JFrame {
     private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
 
         Conexion conn = new Conexion();
-        String nombre, costo;
+        String nombre, corto, desc, uni = "NA", pre = "NA";
         nombre = lbl_Nombre.getText().toString();
-        costo = lbl_Costo.getText().toString();
+        corto = lbl_Corto.getText().toString();
+        desc = lbl_Desc.getText().toString();
+        switch(spn_Uni.getValue().toString()){
+            case "Consulta en consultorio":
+                uni = "C";
+                break;
+            case "Cirugía complicada":
+                break;
+            case "Consulta a domicilio":
+                break;
+            case "Consulta en hospital":
+                break;
+            case "Cirugía intermedia":
+                break;
+            case "Conferencia":
+                break;
+            case "Cirugía simple":
+                break;
+            case "Hora clase":
+                break;
+            default: 
+                Metodos.mensaje("No intete romper el odigo prro");
+                break;
+        }
         
-        if(nombre.trim().length() != 0 && costo.trim().length() != 0){
+        switch(spn_Pre.getValue().toString()){
+            case "Paciente regular":
+                pre = "500";
+                break;
+            case "Nuevo paciente":
+                break;
+            case "Universidad":
+                break;
+            case "Hospital":
+                break;
+            default: 
+                Metodos.mensaje("No intete romper el odigo prro");
+                break;
+        }
+        
+        pre = spn_Pre.getValue().toString();
+        
+        if(nombre.trim().length() != 0 && corto.trim().length() != 0 && desc.trim().length() != 0 && uni.trim().length() != 0 && pre.trim().length() != 0){
             if(bandera.equals("n")){
-                conn.guardar("Precio",nombre,costo,null,null,null,null,null,null,null);
-                Metodos.mensaje("Precio registrado con exito");
+                conn.guardar("Servicio",nombre,corto,desc,uni,pre,null,null,null,null);
+                Metodos.mensaje("Servicio registrado con exito");
             }else if(bandera.equals("m")){
-                conn.actualizar("Precio",nombre,costo,id,null,null,null,null,null,null);
+                conn.actualizar("Servicio",nombre,corto,desc,uni,pre,id,null,null,null);
                 Metodos.mensaje("Cambios realizados con exito");
             }
         }else {
@@ -234,8 +319,14 @@ public class Servicios_m extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField lbl_Costo;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField lbl_Corto;
+    private javax.swing.JTextField lbl_Desc;
     private javax.swing.JTextField lbl_Nombre;
     private javax.swing.JTextField lbl_id;
+    private javax.swing.JSpinner spn_Pre;
+    private javax.swing.JSpinner spn_Uni;
     // End of variables declaration//GEN-END:variables
 }

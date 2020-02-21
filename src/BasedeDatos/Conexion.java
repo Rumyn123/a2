@@ -96,6 +96,20 @@ public class Conexion {
             case "Factura":
                 break;
             case "Servicio":
+                consulta = "SELECT * FROM "+tablaServicios+" ORDER BY `ser_id` DESC ";
+                try{
+                    ps = con.prepareStatement(consulta);
+                    rs = ps.executeQuery();
+                    rs.first();
+                    help = rs.getString(1);
+                    id = Integer.parseInt(help);
+                    id++;
+                    Metodos.mensaje("Se leyo de la db el ultimo id disponible: "+id);
+                    return id;
+                }catch(Exception ex){
+                    Metodos.mensaje_consola("Error de consulta al visualizar el ultimo ID de Servicio");
+                }
+                Metodos.mensaje("No se leyò el ultimo id");
                 break;
             default:
                 Metodos.mensaje("Porfavor, no intente romper el codigo");
@@ -336,6 +350,7 @@ public class Conexion {
                     ps.setString(3, campo3);
                     ps.setString(4, campo4);
                     ps.setString(5, campo5);
+                    Metodos.mensaje("Nombre : "+campo1+" Corto : "+campo2+" Descripcion : "+campo3+" Unidad : "+campo4+" Precio : "+campo5);
                     ps.executeUpdate(); //Ejecuta la consulta
                 }catch(Exception ex){
                     Metodos.mensaje("Error al guardar en la tabla "+tabla);

@@ -31,7 +31,7 @@ public class Servicios extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla_precios = new javax.swing.JTable();
+        tabla_servicios = new javax.swing.JTable();
         btn_Regresar = new javax.swing.JButton();
         btn_Modificar = new javax.swing.JButton();
         btn_Nuevo = new javax.swing.JButton();
@@ -39,8 +39,8 @@ public class Servicios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tabla_precios.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
-        tabla_precios.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_servicios.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
+        tabla_servicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
             },
@@ -48,8 +48,8 @@ public class Servicios extends javax.swing.JFrame {
                 "Id", "Nombre", "Costo"
             }
         ));
-        tabla_precios.setRowHeight(50);
-        jScrollPane1.setViewportView(tabla_precios);
+        tabla_servicios.setRowHeight(50);
+        jScrollPane1.setViewportView(tabla_servicios);
 
         btn_Regresar.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         btn_Regresar.setForeground(new java.awt.Color(255, 51, 51));
@@ -138,13 +138,13 @@ public class Servicios extends javax.swing.JFrame {
     private void btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ModificarActionPerformed
 
         String id;
-        DefaultTableModel dt = (DefaultTableModel) tabla_precios.getModel();
+        DefaultTableModel dt = (DefaultTableModel) tabla_servicios.getModel();
         try{
-            if(tabla_precios.getSelectedRow() != (-1)){
-                id = dt.getValueAt(tabla_precios.getSelectedRow(), 0).toString();
+            if(tabla_servicios.getSelectedRow() != (-1)){
+                id = dt.getValueAt(tabla_servicios.getSelectedRow(), 0).toString();
 
                 if (id != null){
-                    Precios_m pre = new Precios_m(id);
+                    Servicios_m pre = new Servicios_m(id);
                     pre.show(); 
                 } else {
                     Metodos.mensaje("Actualice primero la tabla y seleccione un precio");
@@ -164,7 +164,7 @@ public class Servicios extends javax.swing.JFrame {
 
     private void btn_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NuevoActionPerformed
 
-         Precios_m precio = new Precios_m();
+         Servicios_m precio = new Servicios_m();
          precio.show();
 
         // TODO add your handling code here:
@@ -183,7 +183,7 @@ public class Servicios extends javax.swing.JFrame {
 
     private void actualizarTabla(){
         VerTabla v = new VerTabla();
-        v.visualizar_precios(tabla_precios);
+        v.visualizar(tabla_servicios, "Servicio");
     }
     
     /**
@@ -228,6 +228,6 @@ public class Servicios extends javax.swing.JFrame {
     private javax.swing.JButton btn_Nuevo;
     private javax.swing.JButton btn_Regresar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabla_precios;
+    private javax.swing.JTable tabla_servicios;
     // End of variables declaration//GEN-END:variables
 }

@@ -149,7 +149,24 @@ public class VerTabla {
                 }
                 break;
             case "Servicio":
-                
+                dt.addColumn("ID");
+                dt.addColumn("Nombre");
+                dt.addColumn("Corto");
+                rs = conn.visualizar_servicios();
+                try{
+                    while(rs.next()){
+                        Object[] fila = new Object[3]; //El 2 es el numero de columnas
+                        fila[0] = rs.getObject(1); //primer valor es la id, el segundo el nombre
+                        fila[1] = rs.getObject(2);               
+                        fila[2] = rs.getObject(3);     
+                        dt.addRow(fila);
+                    }
+
+                    tabla.setModel(dt);
+                    tabla.setRowHeight(50);
+                }catch(Exception ex){
+                    System.out.println("Error al visualizar en la tabla servicios");
+                }
                 break;
             case "Univ":
                 dt.addColumn("ID");

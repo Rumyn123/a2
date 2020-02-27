@@ -78,7 +78,7 @@ public class Conexion {
                 Metodos.mensaje("No se leyò el ultimo id");
                 break;
             case "Univ":
-                consulta = "SELECT * FROM"+tablaUnidadDeVenta+" ORDER BY `uni_id` DESC ";
+                consulta = "SELECT * FROM "+tablaUnidadDeVenta+" ORDER BY `uni_id` DESC ";
                 try{
                     ps = con.prepareStatement(consulta);
                     rs = ps.executeQuery();
@@ -96,7 +96,7 @@ public class Conexion {
             case "Factura":
                 break;
             case "Servicio":
-                consulta = "SELECT * FROM "+tablaServicios+" ORDER BY `ser_id` DESC ";
+                consulta = "SELECT * FROM "+tablaServicios+" ORDER BY `ser_id` DESC";
                 try{
                     ps = con.prepareStatement(consulta);
                     rs = ps.executeQuery();

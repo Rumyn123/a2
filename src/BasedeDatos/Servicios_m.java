@@ -6,6 +6,8 @@
 package BasedeDatos;
 
 import java.sql.ResultSet;
+import javax.swing.ComboBoxModel;
+import javax.swing.SpinnerModel;
 
 /**
  *
@@ -44,12 +46,43 @@ public class Servicios_m extends javax.swing.JFrame {
     private void cargar_Datos(String codigo){
         Conexion conn = new Conexion();
         ResultSet rs = conn.buscarId("Servicio",codigo);
+        SpinnerModel mo = this.spn_Pre.getModel();
+        
             try{
                 while(rs.next()){
                     lbl_id.setText(rs.getObject(1).toString());
                     lbl_Nombre.setText(rs.getObject(2).toString());
                     lbl_Corto.setText(rs.getObject(3).toString());
                     lbl_Desc.setText(rs.getObject(4).toString());
+                    switch(rs.getObject(5).toString()){
+                       case "C":
+                           mo.setValue("Consulta en consultorio");
+                           break;
+                       case "CC":
+                           mo.setValue("Cirugía complicada");
+                           break;
+                       case "Consulta a domicilio":
+                           mo.setValue("Consulta a domicilio");
+                           break;
+                       case "Consulta en hospital":
+                           mo.setValue("Consulta en hospital");
+                           break;
+                       case "Cirugía intermedia":
+                           mo.setValue("Cirugía intermedia");
+                           break;
+                       case "Conferencia":
+                           mo.setValue("Conferencia");
+                           break;
+                       case "Cirugía simple":
+                           mo.setValue("Cirugía simple");
+                           break;
+                       case "Hora clase":
+                           mo.setValue("Hora clase");
+                           break;
+                    }
+                    switch(rs.getObject(6).toString()){
+                        
+                    }
                     spn_Uni.setValue(rs.getObject(5));
                     spn_Pre.setValue(rs.getObject(6));
                 }
@@ -80,6 +113,7 @@ public class Servicios_m extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         spn_Uni = new javax.swing.JSpinner();
         spn_Pre = new javax.swing.JSpinner();
+        cmbPrecio = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -137,6 +171,8 @@ public class Servicios_m extends javax.swing.JFrame {
 
         spn_Pre.setModel(new javax.swing.SpinnerListModel(new String[] {"Paciente regular", "Nuevo paciente", "Universidad", "Hospital"}));
 
+        cmbPrecio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,6 +207,10 @@ public class Servicios_m extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmbPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(223, 223, 223))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +239,9 @@ public class Servicios_m extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(spn_Pre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(cmbPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Guardar)
                     .addComponent(btn_Regresar))
@@ -221,6 +263,7 @@ public class Servicios_m extends javax.swing.JFrame {
                 uni = "C";
                 break;
             case "Cirugía complicada":
+                uni = "CC";
                 break;
             case "Consulta a domicilio":
                 break;
@@ -253,8 +296,6 @@ public class Servicios_m extends javax.swing.JFrame {
                 Metodos.mensaje("No intete romper el odigo prro");
                 break;
         }
-        
-        pre = spn_Pre.getValue().toString();
         
         if(nombre.trim().length() != 0 && corto.trim().length() != 0 && desc.trim().length() != 0 && uni.trim().length() != 0 && pre.trim().length() != 0){
             if(bandera.equals("n")){
@@ -316,6 +357,7 @@ public class Servicios_m extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Guardar;
     private javax.swing.JButton btn_Regresar;
+    private javax.swing.JComboBox<String> cmbPrecio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
